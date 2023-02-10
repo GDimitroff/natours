@@ -26,7 +26,7 @@ app.get('/api/v1/tours/:id', (req, res) => {
   if (!tour) {
     return res.status(404).json({
       status: 'fail',
-      message: `Tour with id ${req.params.id} not found`,
+      message: `No tour found with id ${req.params.id}. Use valid id...`,
     });
   }
 
@@ -64,7 +64,7 @@ app.patch('/api/v1/tours/:id', (req, res) => {
   if (!tour) {
     return res.status(404).json({
       status: 'fail',
-      message: `Tour with id ${req.params.id} not found`,
+      message: `No tour found with id ${req.params.id}. Use valid id...`,
     });
   }
 
@@ -75,9 +75,34 @@ app.patch('/api/v1/tours/:id', (req, res) => {
     `${__dirname}/dev-data/data/tours-simple.json`,
     JSON.stringify(tours, null, 2),
     (err) => {
-      res.status(200).send({
+      res.status(200).json({
         status: 'success',
         data: updatedTour,
+      });
+    }
+  );
+});
+
+app.delete('/api/v1/tours/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const tour = tours.find((el) => el.id === id);
+
+  if (!tour) {
+    return res.status(404).json({
+      status: 'fail',
+      message: `No tour found with id ${req.params.id}. Use valid id...`,
+    });
+  }
+
+  tours.splice(id, 1);
+
+  fs.writeFile(
+    `${__dirname}/dev-data/data/tours-simple.json`,
+    JSON.stringify(tours, null, 2),
+    (err) => {
+      res.status(204).json({
+        status: 'success',
+        data: null,
       });
     }
   );
