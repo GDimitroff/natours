@@ -62,7 +62,7 @@ exports.createTour = (req, res) => {
   fs.writeFile(
     `${__dirname}/../dev-data/data/tours-simple.json`,
     JSON.stringify(tours, null, 2),
-    (err) => {
+    () => {
       res.status(201).json({
         status: 'success',
         data: {
@@ -83,7 +83,7 @@ exports.updateTour = (req, res) => {
   fs.writeFile(
     `${__dirname}/../dev-data/data/tours-simple.json`,
     JSON.stringify(tours, null, 2),
-    (err) => {
+    () => {
       res.status(200).json({
         status: 'success',
         data: updatedTour,
@@ -99,7 +99,7 @@ exports.deleteTour = (req, res) => {
   fs.writeFile(
     `${__dirname}/../dev-data/data/tours-simple.json`,
     JSON.stringify(tours, null, 2),
-    (err) => {
+    () => {
       res.status(204).json({
         status: 'success',
         data: null,
