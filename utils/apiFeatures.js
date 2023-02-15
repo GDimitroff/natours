@@ -1,6 +1,6 @@
 class APIFeatures {
-  constructor(query, queryString) {
-    this.query = query;
+  constructor(model, queryString) {
+    this.query = model;
     this.queryString = queryString;
   }
 
@@ -31,7 +31,7 @@ class APIFeatures {
     return this;
   }
 
-  limitFields() {
+  projecting() {
     if (this.queryString.fields) {
       const fields = this.queryString.fields.split(',').join(' ');
       this.query = this.query.select(fields);

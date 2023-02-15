@@ -10,10 +10,10 @@ exports.aliasTopTours = (req, res, next) => {
 
 exports.getAllTours = async (req, res) => {
   try {
-    const features = new APIFeatures(Tour.find(), req.query)
+    const features = new APIFeatures(Tour, req.query)
       .filter()
       .sort()
-      .limitFields()
+      .projecting()
       .paginate();
 
     const tours = await features.query;
